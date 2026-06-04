@@ -1,6 +1,5 @@
 <?php
 $secret = 'vuna2026';
-
 $payload = file_get_contents('php://input');
 $sig = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 
