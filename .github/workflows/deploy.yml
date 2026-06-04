@@ -33,7 +33,7 @@ jobs:
 
       - name: Trigger CyberPanel Git pull
         run: |
-          response=$(curl -k -s -w "\n%{http_code}" -X POST ${{ secrets.CPANEL_WEBHOOK_URL }})
+          response=$(curl -k -s -w "\n%{http_code}" -X GET ${{ secrets.CPANEL_WEBHOOK_URL }})
           http_code=$(echo "$response" | tail -1)
           body=$(echo "$response" | head -n -1)
           echo "Response: $body"
