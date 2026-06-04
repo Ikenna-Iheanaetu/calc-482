@@ -179,3 +179,17 @@ function calculateResult() {
 function updateResult() {
   document.getElementById("result").value = currentExpression || "0";
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    appendToResult,
+    bracketToResult,
+    backspace,
+    operatorToResult,
+    clearResult,
+    calculateResult,
+    normalizeExpression,
+    percentToResult,
+    getExpression: () => currentExpression,
+  };
+}
