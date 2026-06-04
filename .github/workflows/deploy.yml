@@ -31,12 +31,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy files to server via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "index.html,assets/"
-          target: "/home/ikenna.vudse26.cloud/public_html"
+      - name: Deploy via rsync
+        run: |
+          sudo apt-get install -y sshpass rsync
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
+            index.html assets/ \
+            ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/ikenna.vudse26.cloud/public_html/
