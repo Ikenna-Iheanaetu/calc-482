@@ -162,6 +162,24 @@ describe("calculateResult", () => {
   });
 });
 
+describe("power (xⁿ)", () => {
+  test("2 to the power of 3 equals 8", () => {
+    appendToResult(2);
+    operatorToResult("^");
+    appendToResult(3);
+    calculateResult();
+    expect(display()).toBe("8");
+  });
+
+  test("5 to the power of 2 equals 25", () => {
+    appendToResult(5);
+    operatorToResult("^");
+    appendToResult(2);
+    calculateResult();
+    expect(display()).toBe("25");
+  });
+});
+
 describe("normalizeExpression", () => {
   test("replaces pi with Math.PI", () => {
     expect(normalizeExpression("pi")).toBe("Math.PI");

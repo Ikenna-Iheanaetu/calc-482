@@ -176,8 +176,16 @@ function calculateResult() {
 }
 
 
+const SUPERSCRIPTS = { '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻' };
+
+function formatDisplay(expr) {
+  return expr.replace(/\*\*(-?\d*)/g, (_, exp) =>
+    exp.split('').map(c => SUPERSCRIPTS[c] ?? c).join('')
+  );
+}
+
 function updateResult() {
-  document.getElementById("result").value = currentExpression || "0";
+  document.getElementById("result").value = currentExpression ? formatDisplay(currentExpression) : "0";
 }
 
 if (typeof module !== "undefined" && module.exports) {
