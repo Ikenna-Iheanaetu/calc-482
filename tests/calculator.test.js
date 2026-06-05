@@ -216,3 +216,44 @@ describe("normalizeExpression", () => {
     expect(normalizeExpression("2+3")).toBe("2+3");
   });
 });
+
+describe("calculateBMI", () => {
+  test("calculates correct BMI for normal weight", () => {
+    document.getElementById("bmi-weight").value = "70";
+    document.getElementById("bmi-height").value = "175";
+    calculateBMI();
+    expect(document.getElementById("bmi-value").textContent).toBe("22.9");
+    expect(document.getElementById("bmi-category").textContent).toBe("Normal weight");
+  });
+
+  test("classifies underweight correctly", () => {
+    document.getElementById("bmi-weight").value = "45";
+    document.getElementById("bmi-height").value = "175";
+    calculateBMI();
+    expect(document.getElementById("bmi-category").textContent).toBe("Underweight");
+  });
+
+  test("classifies overweight correctly", () => {
+    document.getElementById("bmi-weight").value = "90";
+    document.getElementById("bmi-height").value = "175";
+    calculateBMI();
+    expect(document.getElementById("bmi-category").textContent).toBe("Overweight");
+  });
+
+  test("classifies obese correctly", () => {
+    document.getElementById("bmi-weight").value = "120";
+    document.getElementById("bmi-height").value = "175";
+    calculateBMI();
+    expect(document.getElementById("bmi-category").textContent).toBe("Obese");
+  });
+
+  test("clears BMI inputs and result", () => {
+    document.getElementById("bmi-weight").value = "70";
+    document.getElementById("bmi-height").value = "175";
+    calculateBMI();
+    clearBMICalculator();
+    expect(document.getElementById("bmi-weight").value).toBe("");
+    expect(document.getElementById("bmi-height").value).toBe("");
+    expect(document.getElementById("bmi-result").style.display).toBe("none");
+  });
+});
