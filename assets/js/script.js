@@ -188,6 +188,29 @@ function updateResult() {
   document.getElementById("result").value = currentExpression ? formatDisplay(currentExpression) : "0";
 }
 
+function calculateBMI() {
+  const weight = parseFloat(document.getElementById('bmi-weight').value);
+  const heightCm = parseFloat(document.getElementById('bmi-height').value);
+  if (!weight || !heightCm || weight <= 0 || heightCm <= 0) return;
+  const height = heightCm / 100;
+  const bmi = weight / (height * height);
+  let category, note;
+  if (bmi < 18.5) { category = 'Underweight'; note = 'Consider consulting a nutritionist.'; }
+  else if (bmi < 25) { category = 'Normal weight'; note = 'Keep up the healthy lifestyle!'; }
+  else if (bmi < 30) { category = 'Overweight'; note = 'Consider more physical activity.'; }
+  else { category = 'Obese'; note = 'Please consult a healthcare professional.'; }
+  document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+  document.getElementById('bmi-category').textContent = category;
+  document.getElementById('bmi-note').textContent = note;
+  document.getElementById('bmi-result').style.display = 'block';
+}
+
+function clearBMICalculator() {
+  document.getElementById('bmi-weight').value = '';
+  document.getElementById('bmi-height').value = '';
+  document.getElementById('bmi-result').style.display = 'none';
+}
+
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     appendToResult,
@@ -198,6 +221,8 @@ if (typeof module !== "undefined" && module.exports) {
     calculateResult,
     normalizeExpression,
     percentToResult,
+    calculateBMI,
+    clearBMICalculator,
     getExpression: () => currentExpression,
   };
 }
