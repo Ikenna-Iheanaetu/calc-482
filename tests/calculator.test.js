@@ -8,13 +8,24 @@ const {
   backspace,
   operatorToResult,
   clearResult,
+  calculateBMI,
+  clearBMICalculator,
   calculateResult,
   normalizeExpression,
   getExpression,
 } = require("../assets/js/script.js");
 
 beforeEach(() => {
-  document.body.innerHTML = '<input type="text" id="result" value="" />';
+  document.body.innerHTML = `
+    <input type="text" id="result" value="" />
+    <input type="number" id="bmi-weight" />
+    <input type="number" id="bmi-height" />
+    <div id="bmi-result" style="display:none;">
+      <span id="bmi-value"></span>
+      <span id="bmi-category"></span>
+      <span id="bmi-note"></span>
+    </div>
+  `;
   clearResult();
 });
 
